@@ -5,6 +5,7 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorGarante;
 import ec.edu.ups.controlador.ControladorHipoteca;
 import ec.edu.ups.controlador.ControladorPersona;
 import ec.edu.ups.controlador.ControladorVivienda;
@@ -18,9 +19,12 @@ public class VntPrincipal extends javax.swing.JFrame {
     private ControladorPersona ctrlPersona;
     private ControladorVivienda ctrlVivienda;
     private ControladorHipoteca ctrlHipoteca;
+    private ControladorGarante ctrlGarante;
     private VntRegistrar vntRegistrar;
     private VntVivienda vntVivienda;
     private VntHipoteca vntHipoteca;
+    private VntGarante vntGarente;
+    private VntTabla vntTabla;
     /**
      * Creates new form VntPrincipal
      */
@@ -30,10 +34,13 @@ public class VntPrincipal extends javax.swing.JFrame {
         ctrlPersona = new ControladorPersona();
         ctrlVivienda = new ControladorVivienda();
         ctrlHipoteca = new ControladorHipoteca();
+        ctrlGarante = new ControladorGarante();
         //ventanas
         vntRegistrar = new VntRegistrar(ctrlPersona);
         vntVivienda = new VntVivienda(ctrlVivienda, ctrlPersona);
-        vntHipoteca = new VntHipoteca(ctrlPersona, ctrlVivienda, ctrlHipoteca);
+        vntHipoteca = new VntHipoteca(ctrlPersona, ctrlVivienda, ctrlHipoteca, ctrlGarante, this, vntGarente);
+        vntGarente = new VntGarante(ctrlPersona, ctrlGarante);
+        vntTabla = new VntTabla();
     }
 
     /**
@@ -48,6 +55,7 @@ public class VntPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         registarMenuItem = new javax.swing.JMenuItem();
+        registrarGarMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         registrarViviendaMenuItem = new javax.swing.JMenuItem();
@@ -55,19 +63,26 @@ public class VntPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 250));
-        setPreferredSize(new java.awt.Dimension(900, 700));
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu");
 
         registarMenuItem.setMnemonic('o');
-        registarMenuItem.setText("Registrar");
+        registarMenuItem.setText("Registrar Propietario");
         registarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registarMenuItemActionPerformed(evt);
             }
         });
         fileMenu.add(registarMenuItem);
+
+        registrarGarMenuItem.setText("Registrar Garante");
+        registrarGarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarGarMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(registrarGarMenuItem);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Salir");
@@ -109,11 +124,11 @@ public class VntPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 876, Short.MAX_VALUE)
         );
 
         pack();
@@ -137,6 +152,11 @@ public class VntPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         abrir(vntHipoteca);
     }//GEN-LAST:event_copyMenuItemActionPerformed
+
+    private void registrarGarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarGarMenuItemActionPerformed
+        // TODO add your handling code here:
+        abrir(vntGarente);
+    }//GEN-LAST:event_registrarGarMenuItemActionPerformed
     
     public void abrir(JInternalFrame frame){
         this.add(frame);
@@ -184,6 +204,7 @@ public class VntPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem registarMenuItem;
+    private javax.swing.JMenuItem registrarGarMenuItem;
     private javax.swing.JMenuItem registrarViviendaMenuItem;
     // End of variables declaration//GEN-END:variables
 

@@ -36,20 +36,26 @@ public class Hipoteca implements Serializable {
     private Date fechaFin;
     @Column(name = "Monto")
     private int monto;
+    @Column(name = "NumeroMeses")
+    private int numMeses;
+    @Column(name = "valorCuota")
+    private double valorCu;
     //////////////////////////////////
     @OneToOne
-    @JoinColumn(name = "id_Vivienda")
+    @JoinColumn(name = "id_Persona")
     private Persona persona;
     //////////////////////////////////
 
     public Hipoteca() {
     }
 
-    public Hipoteca(double interes, Date fechaIn, Date fechaFin, int monto, Persona persona) {
+    public Hipoteca(double interes, Date fechaIn, Date fechaFin, int monto, int numMeses, double valorCuota,Persona persona) {
         this.interes = interes;
         this.fechaIn = fechaIn;
         this.fechaFin = fechaFin;
         this.monto = monto;
+        this.numMeses = numMeses;
+        this.valorCu = valorCuota;
         this.persona = persona;
     }
     
@@ -93,6 +99,22 @@ public class Hipoteca implements Serializable {
         this.monto = monto;
     }
 
+    public int getNumMeses() {
+        return numMeses;
+    }
+
+    public void setNumMeses(int numMeses) {
+        this.numMeses = numMeses;
+    }
+
+    public double getValorCu() {
+        return valorCu;
+    }
+
+    public void setValorCu(double valorCu) {
+        this.valorCu = valorCu;
+    }
+
     public Persona getPersona() {
         return persona;
     }
@@ -128,7 +150,7 @@ public class Hipoteca implements Serializable {
 
     @Override
     public String toString() {
-        return "Hipoteca{" + "id=" + id + ", interes=" + interes + ", fechaIn=" + fechaIn + ", fechaFin=" + fechaFin + ", monto=" + monto + ", persona=" + persona + '}';
+        return "Hipoteca{" + "id=" + id + ", interes=" + interes + ", fechaIn=" + fechaIn + ", fechaFin=" + fechaFin + ", monto=" + monto + ", numMeses=" + numMeses + ", persona=" + persona + '}';
     }
-    
+
 }

@@ -6,7 +6,7 @@
 package ec.edu.ups.modelo;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +14,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.NamedQuery;
+//import javax.persistence.OneToOne;
+//import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author braya
  */
 @Entity
+@NamedQuery(name = "buscarNumCasa", query = "Select v from Vivienda v where v.numCasa= :numCasa")
 public class Vivienda implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,6 +32,8 @@ public class Vivienda implements Serializable {
     private Long id;
     @Column(name = "ValorBien")
     private int valorBien;
+    @Column(name = "NumeroCasa")
+    private int numCasa;
     @Column(name = "Calle_Principal")
     private String calleP;
     @Column(name = "Calle_Secundaria")
@@ -47,14 +51,15 @@ public class Vivienda implements Serializable {
     public Vivienda() {
     }
 
-    public Vivienda(int valorBien, String calleP, String calleS, int numPisos, Persona persona) {
+    public Vivienda(int valorBien, int numCasa, String calleP, String calleS, int numPisos, Persona persona) {
         this.valorBien = valorBien;
+        this.numCasa = numCasa;
         this.calleP = calleP;
         this.calleS = calleS;
         this.numPisos = numPisos;
         this.persona = persona;
     }
-            
+
     public Long getId() {
         return id;
     }
@@ -69,6 +74,14 @@ public class Vivienda implements Serializable {
 
     public void setValorBien(int valorBien) {
         this.valorBien = valorBien;
+    }
+
+    public int getNumCasa() {
+        return numCasa;
+    }
+
+    public void setNumCasa(int numCasa) {
+        this.numCasa = numCasa;
     }
 
     public String getCalleP() {
@@ -102,6 +115,7 @@ public class Vivienda implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+    
 ////////////////////////////////////////////////
 //    public Hipoteca getHipoteca() {
 //        return hipoteca;
@@ -135,10 +149,9 @@ public class Vivienda implements Serializable {
 //    public String toString() {
 //        return "ec.edu.ups.modelo.Vivienda[ id=" + id + " ]";
 //    }
-
-    @Override
-    public String toString() {
-        return "Vivienda{" + "id=" + id + ", valorBien=" + valorBien + ", calleP=" + calleP + ", calleS=" + calleS + ", numPisos=" + numPisos + ", persona=" + persona + '}';
-    }
-    
+//
+//    @Override
+//    public String toString() {
+//        return "Vivienda{" + "id=" + id + ", valorBien=" + valorBien + ", numCasa=" + numCasa + ", calleP=" + calleP + ", calleS=" + calleS + ", numPisos=" + numPisos + ", persona=" + persona + '}';
+//    }
 }

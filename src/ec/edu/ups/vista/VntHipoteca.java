@@ -5,6 +5,7 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorGarante;
 import ec.edu.ups.controlador.ControladorHipoteca;
 import ec.edu.ups.controlador.ControladorPersona;
 import ec.edu.ups.controlador.ControladorVivienda;
@@ -24,6 +25,9 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
     private ControladorPersona ctrlPersona;
     private ControladorVivienda ctrlVivienda;
     private ControladorHipoteca ctrlHipoteca;
+    private ControladorGarante ctrlGarante;
+    private VntPrincipal vntPrincpial;
+    private VntGarante vntGarante;
     private DefaultTableModel modelo;
     
     /**
@@ -31,12 +35,18 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
      * @param ctrlPersona
      * @param ctrlVivienda
      * @param ctrlHipoteca
+     * @param ctrlGarante
+     * @param vntPrincpial
+     * @param vntGarante
      */
-    public VntHipoteca(ControladorPersona ctrlPersona, ControladorVivienda ctrlVivienda, ControladorHipoteca ctrlHipoteca) {
+    public VntHipoteca(ControladorPersona ctrlPersona, ControladorVivienda ctrlVivienda, ControladorHipoteca ctrlHipoteca, ControladorGarante ctrlGarante,VntPrincipal vntPrincpial, VntGarante vntGarante) {
         initComponents();
         this.ctrlPersona = ctrlPersona;
         this.ctrlVivienda = ctrlVivienda;
         this.ctrlHipoteca = ctrlHipoteca;
+        this.ctrlGarante = ctrlGarante;
+        this.vntPrincpial = vntPrincpial;
+        this.vntGarante = new VntGarante(ctrlPersona, ctrlGarante);
         modelo = new DefaultTableModel();
     }
 
@@ -49,10 +59,25 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblvivienda = new javax.swing.JTable();
+        btnTabla = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnHipotecar = new javax.swing.JButton();
+        panelGarante = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtApellidoGar = new javax.swing.JTextField();
+        txtNombreGar = new javax.swing.JTextField();
+        btnBuscarGarante = new javax.swing.JButton();
+        txtCedGar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        panelHipoteca = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        txtNFechas = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtCouta = new javax.swing.JTextField();
         txtInteres = new javax.swing.JTextField();
         txt2 = new javax.swing.JTextField();
         txt3 = new javax.swing.JTextField();
@@ -61,19 +86,30 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
         txt6 = new javax.swing.JTextField();
         txt7 = new javax.swing.JTextField();
         txtmonto = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtNumCasa = new javax.swing.JTextField();
+        txtValorB = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnCalcular = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtCedProp = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
         btnCedula = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblvivienda = new javax.swing.JTable();
-        btnTabla = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnHipotecar = new javax.swing.JButton();
 
+        setClosable(true);
+        setMaximizable(true);
+        setAutoscrolls(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
@@ -92,31 +128,6 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Interes Anual");
-
-        jLabel2.setText("Fecha de Inicio");
-
-        jLabel3.setText("Fecha de Fin");
-
-        jLabel4.setText("Monto");
-
-        jLabel5.setText("Cedula del Propietario");
-
-        jLabel6.setText("Nombre del Propietario");
-
-        jLabel7.setText("Apellido del Propietario");
-
-        txtNombre.setEditable(false);
-
-        txtApellido.setEditable(false);
-
-        btnCedula.setText("VERIFICAR CEDULA");
-        btnCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCedulaActionPerformed(evt);
-            }
-        });
-
         tblvivienda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -125,7 +136,7 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Calle Principal", "Calle Secundaria", "Numero de Pisos", "Valor del Bien"
+                "Numero Casa", "Calle Principal", "Calle Secundaria", "Numero de Pisos", "Valor del Bien"
             }
         ) {
             Class[] types = new Class [] {
@@ -141,6 +152,11 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblvivienda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblviviendaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblvivienda);
@@ -161,6 +177,290 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
             }
         });
 
+        panelGarante.setBorder(javax.swing.BorderFactory.createTitledBorder("Garante"));
+
+        jLabel10.setText("Cedula del Garante");
+
+        jLabel11.setText("Nombre del Propietario");
+
+        jLabel12.setText("Apellido del Propietario");
+
+        txtApellidoGar.setEditable(false);
+
+        txtNombreGar.setEditable(false);
+
+        btnBuscarGarante.setText("BUSCAR GARANTE");
+        btnBuscarGarante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarGaranteActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("REGISTRAR GARANTE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelGaranteLayout = new javax.swing.GroupLayout(panelGarante);
+        panelGarante.setLayout(panelGaranteLayout);
+        panelGaranteLayout.setHorizontalGroup(
+            panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGaranteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGaranteLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(81, 81, 81)
+                        .addComponent(txtCedGar))
+                    .addGroup(panelGaranteLayout.createSequentialGroup()
+                        .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addGroup(panelGaranteLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(btnBuscarGarante)))
+                        .addGap(33, 33, 33)
+                        .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNombreGar)
+                            .addComponent(txtApellidoGar))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGaranteLayout.setVerticalGroup(
+            panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGaranteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCedGar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombreGar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApellidoGar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(panelGaranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarGarante)
+                    .addComponent(jButton1))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        panelHipoteca.setBorder(javax.swing.BorderFactory.createTitledBorder("Hipoteca"));
+
+        jLabel8.setText("Numero de fechas");
+
+        txtNFechas.setEditable(false);
+
+        jLabel9.setText("Cuota Mensual");
+
+        txtCouta.setEditable(false);
+
+        jLabel13.setText("Seleccion que propiedad a continuacion desea Hipotecar");
+
+        jLabel14.setText("Numero de Casa");
+
+        jLabel15.setText("Valor del Bien");
+
+        txtNumCasa.setEditable(false);
+
+        txtValorB.setEditable(false);
+
+        jLabel1.setText("Interes Anual");
+
+        jLabel2.setText("Fecha de Inicio");
+
+        jLabel3.setText("Fecha de Fin");
+
+        jLabel4.setText("Monto");
+
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("ID Hipoteca");
+
+        txtId.setEditable(false);
+
+        javax.swing.GroupLayout panelHipotecaLayout = new javax.swing.GroupLayout(panelHipoteca);
+        panelHipoteca.setLayout(panelHipotecaLayout);
+        panelHipotecaLayout.setHorizontalGroup(
+            panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHipotecaLayout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(btnCalcular)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelHipotecaLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelHipotecaLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(panelHipotecaLayout.createSequentialGroup()
+                        .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelHipotecaLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelHipotecaLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCouta, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelHipotecaLayout.createSequentialGroup()
+                                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addGroup(panelHipotecaLayout.createSequentialGroup()
+                                        .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel15)
+                                            .addComponent(jLabel14))
+                                        .addGap(45, 45, 45)
+                                        .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtNumCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtValorB, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelHipotecaLayout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelHipotecaLayout.createSequentialGroup()
+                                        .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtInteres, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelHipotecaLayout.createSequentialGroup()
+                                        .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtmonto, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtId))))
+                        .addGap(6, 6, 6))))
+        );
+        panelHipotecaLayout.setVerticalGroup(
+            panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHipotecaLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtmonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(txtNFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(txtCouta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtNumCasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelHipotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtValorB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCalcular)
+                .addGap(16, 16, 16))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Propietario"));
+
+        jLabel5.setText("Cedula del Propietario");
+
+        jLabel6.setText("Nombre del Propietario");
+
+        txtNombre.setEditable(false);
+
+        jLabel7.setText("Apellido del Propietario");
+
+        txtApellido.setEditable(false);
+
+        btnCedula.setText("VERIFICAR CEDULA");
+        btnCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCedulaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7))
+                            .addGap(57, 57, 57)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNombre)
+                                .addComponent(txtCedProp)
+                                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btnCedula)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCedProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addComponent(btnCedula)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,58 +468,24 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnHipotecar)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnTabla)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar)
+                        .addGap(239, 239, 239))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(57, 57, 57)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtCedProp)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addGap(278, 278, 278))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(btnCedula))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(43, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(613, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtmonto, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addComponent(btnHipotecar)
-                .addGap(55, 55, 55)
-                .addComponent(btnTabla)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(panelGarante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelHipoteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,47 +493,18 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtCedProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCedula))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtmonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(51, 51, 51)
+                        .addComponent(panelGarante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelHipoteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTabla)
                     .addComponent(btnCancelar)
                     .addComponent(btnHipotecar))
-                .addGap(67, 67, 67))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -284,9 +521,11 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
                     if (per.getCedula().equals(Cedula)) {
                         txtNombre.setText(per.getNombre());
                         txtApellido.setText(per.getApellido());
+                        panelHipoteca.setVisible(true);
+                        var listV = per.getListaViviendas();
+                        llenarTabla(listV);
+                        break;
                     }
-                    var listV = per.getListaViviendas();
-                    llenarTabla(listV);
                 }
                 
             } else {
@@ -317,43 +556,132 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
         
         double interes = Double.parseDouble(txtInteres.getText());
         int monto = Integer.valueOf(txtmonto.getText());
+        int nmeses = Integer.valueOf(txtNFechas.getText());
+        double valorC = Double.valueOf(txtCouta.getText());
         
         Persona per = ctrlPersona.buscar(txtCedProp.getText());
-        var hipo = new Hipoteca(interes, fechaI, fechaF, monto, per);
+        var hipo = new Hipoteca(interes, fechaI, fechaF, monto, nmeses, valorC, per);
         System.out.println("hipo " + hipo);
         ctrlHipoteca.create(hipo);
+        int respuesta = JOptionPane.showConfirmDialog(this, "Seguro que desea Hipotecar esta vivienda");
+        if (JOptionPane.OK_OPTION == respuesta) {
+            btnCalcular.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "Tu id de hipoteca es: " + hipo.getId() + "\nNo olvidar este id");
+            txtId.setText(String.valueOf(hipo.getId()));
+            btnTabla.setEnabled(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ok");
+        }
+        
     }//GEN-LAST:event_btnHipotecarActionPerformed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
-//        double interes = (long) (Math.random()*16.99);
-//        txtInteres.setText(String.valueOf(interes));
+        panelGarante.setVisible(false);
+        panelHipoteca.setVisible(false);
+        btnHipotecar.setEnabled(false);
+        btnTabla.setEnabled(false);
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void tblviviendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblviviendaMouseClicked
+        // TODO add your handling code here:
+        modelo = (DefaultTableModel) tblvivienda.getModel();
+        int numcasa = (int) modelo.getValueAt(tblvivienda.getSelectedRow(), 0);
+        int valorB = (int) modelo.getValueAt(tblvivienda.getSelectedRow(), 4);
+        txtNumCasa.setText(String.valueOf(numcasa));
+        txtValorB.setText(String.valueOf(valorB));
+    }//GEN-LAST:event_tblviviendaMouseClicked
+
+    private void btnBuscarGaranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarGaranteActionPerformed
+        // TODO add your handling code here:
+        String Cedula = txtCedGar.getText();
+        if (!Cedula.isBlank()) {
+            var p = ctrlGarante.buscarG(Cedula);
+            if (p != null) {
+                txtNombreGar.setText(p.get(0).getNombre());
+                txtApellidoGar.setText(p.get(0).getApellido());
+            } else {
+                JOptionPane.showMessageDialog(this, "¡¡No existe esta cedula, registrese primero!!");
+                //btnBuscarGarante.setEnabled(false);
+                txtCedProp.setText("");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese cedula en el campo");
+        }
+    }//GEN-LAST:event_btnBuscarGaranteActionPerformed
+
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        // TODO add your handling code here:
+        int diaI = Integer.valueOf(txt2.getText());
+        int mesI = Integer.valueOf(txt3.getText());
+        int anoI = Integer.valueOf(txt4.getText());
+        
+        int diaF = Integer.valueOf(txt5.getText());
+        int mesF = Integer.valueOf(txt6.getText());
+        int anoF = Integer.valueOf(txt7.getText());
+        Date fechaI = new Date(anoI-1900, mesI, diaI);
+        Date fechaF = new Date(anoF-1900, mesF, diaF);
+        
+        int anos = fechaF.getYear()-fechaI.getYear();
+        int meses = (12*anos)+(fechaF.getMonth()-fechaI.getMonth()); 
+        txtNFechas.setText(String.valueOf(meses));
+        double cuotames = Integer.valueOf(txtmonto.getText())/meses;
+        txtCouta.setText(String.valueOf(cuotames));
+        var per = ctrlPersona.verificar(txtCedProp.getText());
+        if (per.get(0).getSueldo() < cuotames) {
+            JOptionPane.showMessageDialog(this, "El suledo es muy bajo por favor ingrese o registre a un garente");
+            panelGarante.setVisible(true);
+        }else{
+            btnHipotecar.setEnabled(true);
+            btnTabla.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        vntPrincpial.abrir(vntGarante);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void llenarTabla(List<Vivienda> listaVivienda){
         modelo = (DefaultTableModel) tblvivienda.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < listaVivienda.size(); i++) {
             var vivienda = listaVivienda.get(i);
-            Object[] cli= {vivienda.getId(), vivienda.getCalleP(), vivienda.getCalleS(), vivienda.getNumPisos(), vivienda.getValorBien()};
+            Object[] cli= {vivienda.getNumCasa(), vivienda.getCalleP(), vivienda.getCalleS(), vivienda.getNumPisos(), vivienda.getValorBien()};
             modelo.addRow(cli);
         }
         tblvivienda.setModel(modelo);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarGarante;
+    private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCedula;
     private javax.swing.JButton btnHipotecar;
     private javax.swing.JButton btnTabla;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelGarante;
+    private javax.swing.JPanel panelHipoteca;
     private javax.swing.JTable tblvivienda;
     private javax.swing.JTextField txt2;
     private javax.swing.JTextField txt3;
@@ -362,9 +690,17 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt6;
     private javax.swing.JTextField txt7;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtApellidoGar;
+    private javax.swing.JTextField txtCedGar;
     private javax.swing.JTextField txtCedProp;
+    private javax.swing.JTextField txtCouta;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtInteres;
+    private javax.swing.JTextField txtNFechas;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreGar;
+    private javax.swing.JTextField txtNumCasa;
+    private javax.swing.JTextField txtValorB;
     private javax.swing.JTextField txtmonto;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,9 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorGarante;
 import ec.edu.ups.controlador.ControladorPersona;
+import ec.edu.ups.modelo.Garante;
 import ec.edu.ups.modelo.Persona;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -14,16 +16,18 @@ import javax.swing.JOptionPane;
  *
  * @author braya
  */
-public class VntRegistrar extends javax.swing.JInternalFrame {
+public class VntGarante extends javax.swing.JInternalFrame {
     private ControladorPersona ctrlPersona;
-    
+    private ControladorGarante ctrlGarante;
     /**
-     * Creates new form VntRegistrar
+     * Creates new form VntGarante
      * @param ctrlPersona
+     * @param ctrlGarante
      */
-    public VntRegistrar(ControladorPersona ctrlPersona) {
+    public VntGarante(ControladorPersona ctrlPersona, ControladorGarante ctrlGarante) {
         initComponents();
         this.ctrlPersona = ctrlPersona;
+        this.ctrlGarante = ctrlGarante;
     }
 
     /**
@@ -35,29 +39,29 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txt1 = new javax.swing.JTextField();
-        txt2 = new javax.swing.JTextField();
-        txt3 = new javax.swing.JTextField();
-        txt4 = new javax.swing.JTextField();
         txt5 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         txt6 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         txt7 = new javax.swing.JTextField();
         txt8 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         txt9 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
+        txt1 = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
+        txt2 = new javax.swing.JTextField();
+        txt3 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txt4 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtCedulaProp = new javax.swing.JTextField();
 
         setClosable(true);
-        setTitle("Registrar");
-
-        jLabel1.setText("Cedula");
+        setTitle("Registrar Garante");
 
         jLabel2.setText("Nombre");
 
@@ -85,46 +89,58 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Cedula");
+
+        jLabel5.setText("Cedula Propietario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(55, 55, 55))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegistrar)
-                .addGap(48, 48, 48)
-                .addComponent(btnCancelar)
-                .addGap(94, 94, 94))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnRegistrar)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnCancelar)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt6)
+                            .addComponent(txtCedulaProp))))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCedulaProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,7 +174,7 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnCancelar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
         );
 
         pack();
@@ -169,7 +185,7 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
         String cedula = txt1.getText();
         String nommbre = txt2.getText();
         String apellido = txt3.getText();
-        double sueldo = Integer.valueOf(txt4.getText());
+        double sueldo = Double.valueOf(txt4.getText());
         String direccion = txt5.getText();
         String telefono = txt6.getText();
         int diaN = Integer.parseInt(txt7.getText());
@@ -177,18 +193,24 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
         int anoN = Integer.parseInt(txt9.getText());
         Date fechaN = new Date(anoN-1900, mesN, diaN);
         
-        if (cedula.isBlank() || nommbre.isBlank() || apellido.isBlank() || txt4.getText().isBlank() || direccion.isBlank() || telefono.isBlank() || txt7.getText().isBlank() || txt8.getText().isBlank() || txt9.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Llene todos los campos");
-        }else{
-            if (ctrlPersona.verificar(cedula) == null) {
-                var persona = new Persona(cedula, nommbre, apellido, sueldo, direccion, telefono, fechaN);
+        var persona = ctrlPersona.verificar(txtCedulaProp.getText());
+        var garanten = ctrlGarante.buscarG(txt1.getText());
+        var p = persona.get(0);
+        if ( p != null) {
+            if (garanten == null && ctrlPersona.verificar(txt1.getText()) == null) {
+                var garante = new Garante(cedula, nommbre, apellido, sueldo, direccion, telefono, fechaN);
+                //var per = new Persona(p.getCedula(), p.getNombre(), p.getApellido(), p.getSueldo(), p.getDireccion(), p.getTelefono(), p.getFechaNac(), p.getListaViviendas(),garante);
+                //ctrlPersona.update(per);
+                ctrlGarante.create(garante);
                 System.out.println("persona " + persona);
-                ctrlPersona.create(persona);
                 JOptionPane.showMessageDialog(this, "¡¡Registrado correctamente!!");
+                this.dispose();
             }else{
-                JOptionPane.showMessageDialog(this, "Esta cedula ya existe");
-                txt1.setText("");
+                JOptionPane.showMessageDialog(this, "Esta cedula ya ha sido registrada anteriormente");
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "Este propietario no existe");
+            txt1.setText("");
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -205,6 +227,7 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -217,5 +240,6 @@ public class VntRegistrar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt7;
     private javax.swing.JTextField txt8;
     private javax.swing.JTextField txt9;
+    private javax.swing.JTextField txtCedulaProp;
     // End of variables declaration//GEN-END:variables
 }

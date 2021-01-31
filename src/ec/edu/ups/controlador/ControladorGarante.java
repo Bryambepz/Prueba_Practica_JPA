@@ -5,7 +5,7 @@
  */
 package ec.edu.ups.controlador;
 
-import ec.edu.ups.modelo.Vivienda;
+import ec.edu.ups.modelo.Garante;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -13,15 +13,15 @@ import javax.persistence.Query;
  *
  * @author braya
  */
-public class ControladorVivienda extends ControladorAbstact<Vivienda>{
+public class ControladorGarante extends ControladorAbstact<Garante>{
 
-    public ControladorVivienda() {
+    public ControladorGarante() {
         super();
     }
     
-    public List<Vivienda> verificar(int numCasa) {
-        Query buscar = getEm().createNamedQuery("buscarNumCasa");
-        buscar.setParameter("numCasa", numCasa);
+    public List<Garante> buscarG(String cedula){
+        Query buscar = getEm().createNamedQuery("buscarCedulaG");
+        buscar.setParameter("cedula", cedula);
         var p = buscar.getResultList();
         if (p.isEmpty()) {
             System.out.println("null");

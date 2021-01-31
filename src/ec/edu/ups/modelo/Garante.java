@@ -6,19 +6,13 @@
 package ec.edu.ups.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -26,8 +20,8 @@ import javax.persistence.Temporal;
  * @author braya
  */
 @Entity
-@NamedQuery(name = "buscarCedula", query = "Select p from Persona p where p.cedula = :cedula")
-public class Persona implements Serializable {
+@NamedQuery(name = "buscarCedulaG", query = "Select g from Garante g where g.cedula = :cedula")
+public class Garante implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,52 +42,21 @@ public class Persona implements Serializable {
     @Column(name = "Fecha_Nacimiento")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNac;
-    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
-    private List<Vivienda> listaViviendas;
-    @OneToOne
-    @JoinColumn(name = "Garante")
-    private Garante garante;
+    
 
-    public Persona() {
-        listaViviendas = new ArrayList<>();
+    public Garante() {
+    }
+
+    public Garante(String cedula, String nombre, String Apellido, double sueldo, String direccion, String telefono, Date fechaNac) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.Apellido = Apellido;
+        this.sueldo = sueldo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaNac = fechaNac;
     }
     
-    public Persona(String cedula, String nombre, String Apellido, double sueldo, String direccion, String telefono, Date fechaN) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.Apellido = Apellido;
-        this.sueldo = sueldo;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.fechaNac = fechaN;
-        listaViviendas = new ArrayList<>();
-    }
-
-    public Persona(String cedula, String nombre, String Apellido, double sueldo, String direccion, String telefono, Date fechaN, List<Vivienda> listaViviendas) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.Apellido = Apellido;
-        this.sueldo = sueldo;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.fechaNac = fechaN;
-        listaViviendas = new ArrayList<>();
-    }
-
-//    public Persona(String cedula, String nombre, String Apellido, double sueldo, String direccion, String telefono, Date fechaNac, List<Vivienda> listaViviendas, Garante garante) {
-//        this.cedula = cedula;
-//        this.nombre = nombre;
-//        this.Apellido = Apellido;
-//        this.sueldo = sueldo;
-//        this.direccion = direccion;
-//        this.telefono = telefono;
-//        this.fechaNac = fechaNac;
-//        this.listaViviendas = listaViviendas;
-//        this.garante = garante;
-//        listaViviendas = new ArrayList<>();
-//    }
-
-
     public Long getId() {
         return id;
     }
@@ -158,23 +121,6 @@ public class Persona implements Serializable {
         this.fechaNac = fechaNac;
     }
 
-    public Garante getGarante() {
-        return garante;
-    }
-
-    public void setGarante(Garante garante) {
-        this.garante = garante;
-    }
-
-    public List<Vivienda> getListaViviendas() {
-        return listaViviendas;
-    }
-
-    public void setListaViviendas(List<Vivienda> listaViviendas) {
-        this.listaViviendas = listaViviendas;
-    }
-    
-        
     @Override
     public int hashCode() {
         int hash = 0;
@@ -185,24 +131,24 @@ public class Persona implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Persona)) {
+        if (!(object instanceof Garante)) {
             return false;
         }
-        Persona other = (Persona) object;
+        Garante other = (Garante) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-
-//    @Override
-//    public String toString() {
-//        return "ec.edu.ups.modelo.Persona[ id= " + id + " ]";
-//    }
 //
 //    @Override
 //    public String toString() {
-//        return "Persona{" + "id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", Apellido=" + Apellido + ", sueldo=" + sueldo + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNac=" + fechaNac + ", garante=" + garante + ", listaViviendas=" + listaViviendas + '}';
+//        return "ec.edu.ups.modelo.Garante[ id=" + id + " ]";
 //    }
 
+    @Override
+    public String toString() {
+        return "Garante{" + "id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", Apellido=" + Apellido + ", sueldo=" + sueldo + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNac=" + fechaNac + '}';
+    }
+    
 }
