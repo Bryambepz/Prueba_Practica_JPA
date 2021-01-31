@@ -6,7 +6,8 @@
 package ec.edu.ups.controlador;
 
 import ec.edu.ups.utils.JPAUtils;
-import java.lang.reflect.*;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,7 +28,6 @@ public abstract class ControladorAbstact<T> {
         clase = (Class) pt.getActualTypeArguments()[0];
         em = JPAUtils.getEntityManager();
     }
-    
     
     public ControladorAbstact(EntityManager em) {
         listaObjetos = new ArrayList<>();

@@ -6,11 +6,36 @@
 package ec.edu.ups.controlador;
 
 import ec.edu.ups.modelo.Persona;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
  * @author braya
  */
-public class ControladorPersona extends ControladorAbstact<Persona>{
+public class ControladorPersona extends ControladorAbstact<Persona> {
+    public Persona obtenerPersona;
     
+    public ControladorPersona() {
+        super();
+    }
+
+    public List<Persona> verificar(String cedula) {
+        Query buscar = getEm().createNamedQuery("buscarCedula");
+        buscar.setParameter("cedula", cedula);
+        var p = buscar.getResultList();
+        if (p.isEmpty()) {
+            System.out.println("null");
+            return null;
+        }else{ 
+            System.out.println("lleno");
+            return p;
+        }
+    }
+    
+    public Persona buscar(String cedula) {
+       return (Persona) getEm().createNamedQuery("buscarCedula")
+               .setParameter("cedula", cedula)
+               .getSingleResult();
+    }
 }

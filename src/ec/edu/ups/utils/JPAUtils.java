@@ -5,17 +5,17 @@
  */
 package ec.edu.ups.utils;
 
-import javax.persistence.*;
-
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
 /**
  *
  * @author braya
  */
 public class JPAUtils {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Prueba_Practica_JPAPU");
-
-    public static EntityManager getEntityManager() {
+    
+    public static EntityManager getEntityManager(){
         return emf.createEntityManager();
     }
-    
 }

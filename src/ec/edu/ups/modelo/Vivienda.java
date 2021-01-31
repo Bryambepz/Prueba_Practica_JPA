@@ -6,13 +6,16 @@
 package ec.edu.ups.modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -25,16 +28,33 @@ public class Vivienda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "valor del Bien")
+    @Column(name = "ValorBien")
     private int valorBien;
-    @Column(name = "Calle Principal")
+    @Column(name = "Calle_Principal")
     private String calleP;
-    @Column(name = "Calle Secundaria")
+    @Column(name = "Calle_Secundaria")
     private String calleS;
-    @Column(name = "NumPisos")
-    private int NumPisos;
-    
-    
+    @Column(name = "Numero_de_Pisos")
+    private int numPisos;
+    @ManyToOne
+    @JoinColumn(name = "fk_persona")
+    private Persona persona;
+///////////////////
+//    @OneToOne(mappedBy = "Vivienda", cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
+//    private Hipoteca hipoteca;
+/////////////////////
+    public Vivienda() {
+    }
+
+    public Vivienda(int valorBien, String calleP, String calleS, int numPisos, Persona persona) {
+        this.valorBien = valorBien;
+        this.calleP = calleP;
+        this.calleS = calleS;
+        this.numPisos = numPisos;
+        this.persona = persona;
+    }
+            
     public Long getId() {
         return id;
     }
@@ -68,13 +88,29 @@ public class Vivienda implements Serializable {
     }
 
     public int getNumPisos() {
-        return NumPisos;
+        return numPisos;
     }
 
-    public void setNumPisos(int NumPisos) {
-        this.NumPisos = NumPisos;
+    public void setNumPisos(int numPisos) {
+        this.numPisos = numPisos;
     }
-    
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+////////////////////////////////////////////////
+//    public Hipoteca getHipoteca() {
+//        return hipoteca;
+//    }
+//
+//    public void setHipoteca(Hipoteca hipoteca) {
+//        this.hipoteca = hipoteca;
+//    }
+////////////////////////////////////////////////
     @Override
     public int hashCode() {
         int hash = 0;
@@ -95,9 +131,14 @@ public class Vivienda implements Serializable {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "ec.edu.ups.modelo.Vivienda[ id=" + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "Vivienda{" + "id=" + id + ", valorBien=" + valorBien + ", calleP=" + calleP + ", calleS=" + calleS + ", NumPisos=" + NumPisos + '}';
+        return "Vivienda{" + "id=" + id + ", valorBien=" + valorBien + ", calleP=" + calleP + ", calleS=" + calleS + ", numPisos=" + numPisos + ", persona=" + persona + '}';
     }
     
 }

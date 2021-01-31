@@ -6,12 +6,17 @@
 package ec.edu.ups.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -19,6 +24,7 @@ import javax.persistence.Temporal;
  * @author braya
  */
 @Entity
+@NamedQuery(name = "buscarCedula", query = "Select p from Persona p where p.cedula = :cedula")
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,14 +36,45 @@ public class Persona implements Serializable {
     @Column(name = "Nombre")
     private String nombre;
     @Column(name = "Apellido")
-    private String apellido;
+    private String Apellido;
     @Column(name = "Sueldo")
     private double sueldo;
     @Column(name = "Direccion")
-    private String direcion;
-    @Column(name = "Fecha Nacimiento")
+    private String direccion;
+    @Column(name = "Telefono")
+    private String telefono;
+    @Column(name = "Fecha_Nacimiento")
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date FechaNac;
+    private Date fechaNac;
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+    private List<Vivienda> listaViviendas;
+
+    public Persona() {
+        listaViviendas = new ArrayList<>();
+    }
+    
+    public Persona(String cedula, String nombre, String Apellido, double sueldo, String direccion, String telefono, Date fechaN) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.Apellido = Apellido;
+        this.sueldo = sueldo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaNac = fechaN;
+        listaViviendas = new ArrayList<>();
+    }
+
+    public Persona(String cedula, String nombre, String Apellido, double sueldo, String direccion, String telefono, Date fechaN, List<Vivienda> listaViviendas) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.Apellido = Apellido;
+        this.sueldo = sueldo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaNac = fechaN;
+        this.listaViviendas = new ArrayList<>();
+    }
+    
     
     public Long getId() {
         return id;
@@ -64,11 +101,11 @@ public class Persona implements Serializable {
     }
 
     public String getApellido() {
-        return apellido;
+        return Apellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
     }
 
     public double getSueldo() {
@@ -79,22 +116,38 @@ public class Persona implements Serializable {
         this.sueldo = sueldo;
     }
 
-    public String getDirecion() {
-        return direcion;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDirecion(String direcion) {
-        this.direcion = direcion;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public Date getFechaNac() {
-        return FechaNac;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setFechaNac(Date FechaNac) {
-        this.FechaNac = FechaNac;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
+    public Date getFechaN() {
+        return fechaNac;
+    }
+
+    public void setFechaN(Date fechaN) {
+        this.fechaNac = fechaN;
+    }
+
+    public List<Vivienda> getListaViviendas() {
+        return listaViviendas;
+    }
+
+    public void setListaViviendas(List<Vivienda> listaViviendas) {
+        this.listaViviendas = listaViviendas;
+    }
+                
     @Override
     public int hashCode() {
         int hash = 0;
@@ -115,9 +168,14 @@ public class Persona implements Serializable {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "ec.edu.ups.modelo.Persona[ id= " + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "ec.edu.ups.modelo.Garante[ id=" + id + " ]";
+        return "Persona{" + "id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", Apellido=" + Apellido + ", sueldo=" + sueldo + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaN=" + fechaNac + '}';
     }
     
 }
