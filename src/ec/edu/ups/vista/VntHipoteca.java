@@ -15,6 +15,7 @@ import ec.edu.ups.modelo.Vivienda;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,7 +29,10 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
     private ControladorGarante ctrlGarante;
     private VntPrincipal vntPrincpial;
     private VntGarante vntGarante;
+    private VntTabla vntTabla;
     private DefaultTableModel modelo;
+    private boolean confirmar;
+    private long id;
     
     /**
      * Creates new form VntHipoteca
@@ -39,7 +43,7 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
      * @param vntPrincpial
      * @param vntGarante
      */
-    public VntHipoteca(ControladorPersona ctrlPersona, ControladorVivienda ctrlVivienda, ControladorHipoteca ctrlHipoteca, ControladorGarante ctrlGarante,VntPrincipal vntPrincpial, VntGarante vntGarante) {
+    public VntHipoteca(ControladorPersona ctrlPersona, ControladorVivienda ctrlVivienda, ControladorHipoteca ctrlHipoteca, ControladorGarante ctrlGarante,VntPrincipal vntPrincpial, VntGarante vntGarante, VntTabla vntTabla) {
         initComponents();
         this.ctrlPersona = ctrlPersona;
         this.ctrlVivienda = ctrlVivienda;
@@ -47,9 +51,28 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
         this.ctrlGarante = ctrlGarante;
         this.vntPrincpial = vntPrincpial;
         this.vntGarante = new VntGarante(ctrlPersona, ctrlGarante);
+        this.vntTabla = new VntTabla(ctrlHipoteca, this);
         modelo = new DefaultTableModel();
+        confirmar = false;
+        id = 0;
+    }
+    
+    public boolean isConfirmar() {
+        return confirmar;
     }
 
+    public void setConfirmar(boolean confirmar) {
+        this.confirmar = confirmar;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,6 +185,11 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblvivienda);
 
         btnTabla.setText("TABLA DE AMORTIZACION");
+        btnTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTablaActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -567,6 +595,7 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
         if (JOptionPane.OK_OPTION == respuesta) {
             btnCalcular.setEnabled(false);
             JOptionPane.showMessageDialog(this, "Tu id de hipoteca es: " + hipo.getId() + "\nNo olvidar este id");
+            setId(id = Long.valueOf(txtId.getText()));
             txtId.setText(String.valueOf(hipo.getId()));
             btnTabla.setEnabled(true);
         }else{
@@ -600,6 +629,8 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
             if (p != null) {
                 txtNombreGar.setText(p.get(0).getNombre());
                 txtApellidoGar.setText(p.get(0).getApellido());
+                btnHipotecar.setEnabled(true);
+                btnTabla.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(this, "¡¡No existe esta cedula, registrese primero!!");
                 //btnBuscarGarante.setEnabled(false);
@@ -642,6 +673,13 @@ public class VntHipoteca extends javax.swing.JInternalFrame {
         vntPrincpial.abrir(vntGarante);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
+        // TODO add your handling code here:
+        vntPrincpial.abrir(vntTabla);
+        this.setConfirmar(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTablaActionPerformed
 
     public void llenarTabla(List<Vivienda> listaVivienda){
         modelo = (DefaultTableModel) tblvivienda.getModel();

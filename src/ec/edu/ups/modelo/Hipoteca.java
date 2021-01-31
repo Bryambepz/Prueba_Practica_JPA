@@ -7,14 +7,15 @@ package ec.edu.ups.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
+//import javax.persistence.MapsId;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,6 +23,7 @@ import javax.persistence.OneToOne;
  * @author braya
  */
 @Entity
+@NamedQuery(name = "buscarIdHipo", query = "Select h from Hipoteca h where h.id= :id")
 public class Hipoteca implements Serializable {
 
     private static final long serialVersionUID = 1L;

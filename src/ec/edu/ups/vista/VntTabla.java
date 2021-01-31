@@ -5,17 +5,27 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorHipoteca;
+import java.text.DecimalFormat;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author braya
  */
 public class VntTabla extends javax.swing.JInternalFrame {
-
+    private ControladorHipoteca ctrlHipo;
+    private VntHipoteca vntHipo;
+    
+    private DefaultTableModel modelo;
     /**
      * Creates new form VntTabla
      */
-    public VntTabla() {
+    public VntTabla(ControladorHipoteca ctrlHipo, VntHipoteca vntHipo) {
         initComponents();
+        this.ctrlHipo = ctrlHipo;
+        this.vntHipo = vntHipo;
+        modelo = new DefaultTableModel();
     }
 
     /**
@@ -27,21 +37,199 @@ public class VntTabla extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAmort = new javax.swing.JTable();
+        panelConsultaH = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtid = new javax.swing.JTextField();
+        bntVerificar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtProp = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtCed = new javax.swing.JTextField();
+
+        setClosable(true);
+        setTitle("Tabla Amortizacion");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        tblAmort.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "N° Cuota", "Saldo Inicial", "Cuota", "Intereses", "Amoritzacion Capital", "Saldo final "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblAmort);
+
+        panelConsultaH.setBorder(javax.swing.BorderFactory.createTitledBorder("Verificar Hipoteca"));
+
+        jLabel1.setText("Ingrese Id para buscar Hipoteca");
+
+        bntVerificar.setText("Verifiar");
+        bntVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVerificarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Propietario");
+
+        jLabel3.setText("Cedula Propietario");
+
+        javax.swing.GroupLayout panelConsultaHLayout = new javax.swing.GroupLayout(panelConsultaH);
+        panelConsultaH.setLayout(panelConsultaHLayout);
+        panelConsultaHLayout.setHorizontalGroup(
+            panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultaHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(34, 34, 34)
+                .addGroup(panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bntVerificar)
+                    .addComponent(txtid)
+                    .addComponent(txtProp, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                    .addComponent(txtCed))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        panelConsultaHLayout.setVerticalGroup(
+            panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultaHLayout.createSequentialGroup()
+                .addGroup(panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtCed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelConsultaHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtProp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(bntVerificar)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelConsultaH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(panelConsultaH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        if (vntHipo.isConfirmar()) {
+            System.out.println("yes");
+            panelConsultaH.setVisible(false);
+            var tb = ctrlHipo.buscarH(vntHipo.getId());
+            if (tb != null) {
+                llenarTabla(tb.get(0).getNumMeses());
+            }
+            
+        }else{
+            System.out.println("no");
+            panelConsultaH.setVisible(true);
+        }
+    }//GEN-LAST:event_formInternalFrameActivated
 
+    private void bntVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerificarActionPerformed
+        // TODO add your handling code here:
+        var tb = ctrlHipo.buscarH(Long.valueOf(txtid.getText()));
+        if (tb != null) {
+            txtCed.setText(tb.get(0).getPersona().getCedula());
+            txtProp.setText(tb.get(0).getPersona().getNombre());
+            bntVerificar.setEnabled(true);
+            llenarTabla(tb.get(0).getNumMeses());
+        }
+    }//GEN-LAST:event_bntVerificarActionPerformed
+
+    public void llenarTabla(int cuotas){
+        modelo = (DefaultTableModel) tblAmort.getModel();
+        modelo.setRowCount(0);
+        var hipot = ctrlHipo.buscarH(Long.valueOf(txtid.getText()));
+        var h = hipot.get(0);
+        DecimalFormat df = new DecimalFormat("#.0000");
+        double t=30;
+        double ts=360;
+        double exp = t/ts;
+        double TEM = (Math.pow(1+h.getInteres()/100,exp))-1;
+        double saldoI = h.getMonto();
+        double interese = saldoI*TEM;
+        double amortizacionC = (h.getValorCu());
+        double cuota = amortizacionC+interese;
+        double saldoF = saldoI-amortizacionC;
+        
+        for (int i = 1; i <= cuotas; i++) {
+            System.out.println("interese = " + saldoI +"*"+df.format(TEM));
+            interese = saldoI*TEM;
+            Object[] amortizacion= {i,saldoI,cuota,interese,amortizacionC,saldoF};
+            cuota = amortizacionC+interese;
+            saldoI=saldoF;
+            saldoF-=amortizacionC;
+            modelo.addRow(amortizacion);
+        }
+        tblAmort.setModel(modelo);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntVerificar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelConsultaH;
+    private javax.swing.JTable tblAmort;
+    private javax.swing.JTextField txtCed;
+    private javax.swing.JTextField txtProp;
+    private javax.swing.JTextField txtid;
     // End of variables declaration//GEN-END:variables
 }
